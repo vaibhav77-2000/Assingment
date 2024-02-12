@@ -1,0 +1,11 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+ubuntu     10308  0.4  0.9  16964  9472 ?        Ss   18:20   0:00 /lib/systemd/systemd --user
+ubuntu     10391  0.4  0.8  17772  8608 ?        S    18:20   0:00 sshd: ubuntu@pts/0
+mysql       2444  0.3 37.5 1325004 365316 ?      Ssl  14:31   0:52 /usr/sbin/mysqld
+tomcat      8707  0.1 11.9 2295016 115876 ?      Ssl  15:16   0:18 /usr/lib/jvm/default-java/bin/java -Djava.util.logging.config.file=/var/lib/tomcat9/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.awt.headless=true -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -Dignore.endorsed.dirs= -classpath /usr/share/tomcat9/bin/bootstrap.jar:/usr/share/tomcat9/bin/tomcat-juli.jar -Dcatalina.base=/var/lib/tomcat9 -Dcatalina.home=/usr/share/tomcat9 -Djava.io.tmpdir=/tmp org.apache.catalina.startup.Bootstrap start
+root           1  0.0  1.1 167428 11092 ?        Ss   14:27   0:05 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    14:27   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   14:27   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   14:27   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I<   14:27   0:00 [slub_flushwq]
+root           6  0.0  0.0      0     0 ?        I<   14:27   0:00 [netns]

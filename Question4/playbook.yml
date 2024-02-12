@@ -1,0 +1,44 @@
+---
+- name: Deploy and Restart Tomcat if WAR file changes
+  hosts: node
+  become: yes
+
+  tasks:
+    - name: Check if the WAR file exists
+      stat:
+        path: /var/lib/tomcat9/webapps/sample.war
+      register: war_file_info
+
+    - name: Fetch current WAR file checksum
+      set_fact:
+        current_checksum: "{{ lookup('file', '/var/lib/tomcat9/webapps/sample.war', errors='ignore') | default('') }}"
+      when: war_file_info.stat.exists
+
+    - name: Restart Tomcat if WAR file changed
+      service:
+        name: tomcat9
+        state: restarted
+      when: war_file_info.stat.exists and current_checksum != ansible_checksum | default('')
+
+    - name: Check if a specific process is running
+      shell: ps aux | grep -q "your_process_name"
+      register: process_status
+      ignore_errors: true
+
+    - name: Print process status
+      debug:
+        msg: "The process is {{ 'running' if process_status.rc == 0 else 'not running' }}"
+
+    - name: Save top 10 running processes to a file on the remote server
+      shell: ps aux --sort=-%cpu | head -n 11 > /tmp/top_processes.txt
+      register: save_top_processes
+
+    - name: Fetch the file from the remote server to the local machine
+      fetch:
+        src: /tmp/top_processes.txt
+        dest: /home/vaibhav-baraskar/DevOps/Docker/Assingment/Question4/
+        flat: yes
+
+    - name: Display the result of the fetch command
+      debug:
+        var: save_top_processes.stdout_lines
